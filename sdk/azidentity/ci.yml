@@ -26,6 +26,7 @@ stages:
   parameters:
     RunLiveTests: true
     ServiceDirectory: 'azidentity'
+    SupportedClouds: 'Public,UsGov,China,Canary'
     PreSteps:
       - pwsh: |
           [System.Convert]::FromBase64String($env:PFX_CONTENTS) | Set-Content -Path $(Agent.TempDirectory)/test.pfx -AsByteStream
