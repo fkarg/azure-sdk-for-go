@@ -89,7 +89,7 @@ func newKeyring(name string) (*keyring, error) {
 	}
 	// the user keyring is available to all processes owned by the user whereas the user
 	// *session* keyring is available only to processes in the current session i.e. shell
-	ringID, err := unix.KeyctlGetKeyringID(unix.KEY_SPEC_USER_SESSION_KEYRING, true)
+	ringID, err := unix.KeyctlGetKeyringID(unix.KEY_SPEC_USER_KEYRING, true)
 	if err != nil {
 		return nil, fmt.Errorf("couldn't get the user keyring due to error %q", err)
 	}
@@ -98,10 +98,10 @@ func newKeyring(name string) (*keyring, error) {
 	// keys, persistent keys exist only in kernel memory and are therefore lost on shutdown. If
 	// the attempt fails--some systems don't support persistent keyrings--we just use the plain
 	// old keyring.
-	if persistentRing, err := unix.KeyctlInt(unix.KEYCTL_GET_PERSISTENT, -1, ringID, 0, 0); err == nil {
-		log.Write(azidentity.EventAuthentication, "using a persistent keyring")
-		ringID = persistentRing
-	}
+	// if persistentRing, err := unix.KeyctlInt(unix.KEYCTL_GET_PERSISTENT, -1, ringID, 0, 0); err == nil {
+	// 	log.Write(azidentity.EventAuthentication, "using a persistent keyring")
+	// 	ringID = persistentRing
+	// }
 	return &keyring{description: name, file: p, ringID: ringID}, nil
 }
 
