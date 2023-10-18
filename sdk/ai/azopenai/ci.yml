@@ -26,6 +26,8 @@ stages:
   - template: /eng/pipelines/templates/jobs/archetype-sdk-client.yml
     parameters:
       ServiceDirectory: "ai/azopenai"
+      TimeoutInMinutes: 35
+      TestRunTime: 30m
       RunLiveTests: true
       CloudConfig:
         Public:
