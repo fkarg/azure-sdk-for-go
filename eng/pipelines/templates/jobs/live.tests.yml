@@ -28,9 +28,6 @@ parameters:
   - name: UsePlatformContainer
     type: boolean
     default: false
-  - name: TestRunTime
-    type: string
-    default: '600s'
 
 jobs:
   - job:
