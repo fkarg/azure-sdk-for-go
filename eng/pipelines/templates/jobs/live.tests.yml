@@ -49,6 +49,7 @@ jobs:
     pool:
       name: $(Pool)
       vmImage: $(OSVmImage)
+      demands: 'HoldMachine -equals true'
 
     timeoutInMinutes: ${{ parameters.TimeoutInMinutes }}
 
