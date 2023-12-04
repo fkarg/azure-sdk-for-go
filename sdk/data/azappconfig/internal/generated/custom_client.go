@@ -31,6 +31,7 @@ func NewCreateSnapshotPoller[T any](ctx context.Context, client *AzureAppConfigu
 		if err != nil {
 			return nil, err
 		}
+		resp.Request.URL.Host = "tcf91607dc278ae3c-azappconfig-go.azconfig.io"
 		poller, err := runtime.NewPoller[T](resp, client.internal.Pipeline(), nil)
 		return poller, err
 	} else {
