@@ -2,6 +2,9 @@ parameters:
   - name: ServiceDirectory
     type: string
     default: ''
+  - name: Packages
+    type: string
+    default: ''
   - name: RunLiveTests
     type: boolean
     default: false
@@ -234,3 +237,4 @@ stages:
                     - ${{ if not(contains(parameters.UnsupportedClouds, cloud.key)) }}:
                       - ${{ cloud.key }}
             ServiceDirectory: ${{ parameters.ServiceDirectory }}
+            Packages:
