@@ -15,7 +15,8 @@ param (
   $repoOwner = "", # the owning organization of the repository. EG "Azure"
   $repoName = "", # the name of the repository. EG "azure-sdk-for-java"
   $repoId = "$repoOwner/$repoName", # full repo id. EG azure/azure-sdk-for-net  DevOps: $(Build.Repository.Id),
-  [switch]$continueOnError = $false
+  [switch]$continueOnError = $false,
+  [switch]$NoRecurse
 )
 
 . (Join-Path $PSScriptRoot common.ps1)
@@ -24,7 +25,7 @@ $apiUrl = "https://api.github.com/repos/$repoId"
 Write-Host "Using API URL $apiUrl"
 
 # VERIFY PACKAGES
-$pkgList = VerifyPackages -artifactLocation $artifactLocation -workingDirectory $workingDirectory -apiUrl $apiUrl -releaseSha $releaseSha -continueOnError $continueOnError
+$pkgList = VerifyPackages -artifactLocation $artifactLocation -workingDirectory $workingDirectory -apiUrl $apiUrl -releaseSha $releaseSha -continueOnError $continueOnError -NoRecurse:$NoRecurse
 
 if ($pkgList) {
   Write-Host "Given the visible artifacts, github releases will be created for the following:"

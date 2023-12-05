@@ -17,6 +17,9 @@ steps:
       -releaseSha ${{ parameters.ReleaseSha }}
       -repoId ${{ parameters.RepoId }}
       -workingDirectory '${{ parameters.WorkingDirectory }}'
+      # go keeps packages in sub-directories of other packages, by default they will all be
+      # released, but we want each to have its own release pipeline instead.
+      -NoRecurse
     pwsh: true
   timeoutInMinutes: 5
   env:
