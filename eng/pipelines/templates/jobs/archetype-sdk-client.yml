@@ -225,12 +225,12 @@ stages:
       - ${{ if or(in(variables['Build.Reason'], 'Manual', ''), eq(parameters.IncludeRelease, true)) }}:
         - template: archetype-go-release.yml
           parameters:
-            DependsOn:
-              - Build
-              # Copy cloud conditional logic from live test stage
-              - ${{if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.RunLiveTests, 'true'))}}:
-                - ${{ each cloud in parameters.CloudConfig }}:
-                  - ${{ if or(contains(parameters.Clouds, cloud.key), and(contains(variables['Build.DefinitionName'], 'tests-weekly'), contains(parameters.SupportedClouds, cloud.key))) }}:
-                    - ${{ if not(contains(parameters.UnsupportedClouds, cloud.key)) }}:
-                      - ${{ cloud.key }}
+            DependsOn: []
+              # - Build
+              # # Copy cloud conditional logic from live test stage
+              # - ${{if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.RunLiveTests, 'true'))}}:
+              #   - ${{ each cloud in parameters.CloudConfig }}:
+              #     - ${{ if or(contains(parameters.Clouds, cloud.key), and(contains(variables['Build.DefinitionName'], 'tests-weekly'), contains(parameters.SupportedClouds, cloud.key))) }}:
+              #       - ${{ if not(contains(parameters.UnsupportedClouds, cloud.key)) }}:
+              #         - ${{ cloud.key }}
             ServiceDirectory: ${{ parameters.ServiceDirectory }}
