@@ -225,10 +225,10 @@ stages:
   - ${{ if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal')) }}:
     - ${{ if not(contains(variables['Build.DefinitionName'], 'weekly')) }}:
       - ${{ if or(in(variables['Build.Reason'], 'Manual', ''), eq(parameters.IncludeRelease, true)) }}:
-        - ${{ each package in coalesce(parameters.ReleasePackages, parameters.ServiceDirectory) }}
+        - ${{ each package in coalesce(parameters.ReleasePackages, parameters.ServiceDirectory) }}:
           - template: archetype-go-release.yml
             parameters:
-              ServiceDirectory: ${{ package }}
+              Package: ${{ package }}
               DependsOn: ''
                 #  - Build
                 #  # Copy cloud conditional logic from live test stage
