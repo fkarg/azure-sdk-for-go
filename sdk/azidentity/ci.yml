@@ -27,6 +27,7 @@ stages:
     RunLiveTests: true
     UsePipelineProxy: false
     ServiceDirectory: 'azidentity'
+    Packages: 'azidentity'
     CloudConfig:
       Public:
         SubscriptionConfigurations:
