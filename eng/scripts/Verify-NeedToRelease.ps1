@@ -9,8 +9,6 @@ param (
 $apiUrl = "https://api.github.com/repos/$repoId"
 Write-Host "Using API URL $apiUrl"
 
-Set-PSDebug -Trace 2
-
 # VERIFY CHANGELOG
 $PackageProp = Get-PkgProperties -PackageName $PackageName -ServiceDirectory $ServiceDirectory
 $changeLogEntries = Get-ChangeLogEntries -ChangeLogLocation $PackageProp.ChangeLogPath

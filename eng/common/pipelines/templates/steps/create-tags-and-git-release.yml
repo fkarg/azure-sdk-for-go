@@ -19,7 +19,7 @@ steps:
       -releaseSha ${{ parameters.ReleaseSha }}
       -repoId ${{ parameters.RepoId }}
       -workingDirectory '${{ parameters.WorkingDirectory }}'
-      -NoRecurse:$${{ parameters.NoRecurse }}
+      -NoRecurse
     pwsh: true
   timeoutInMinutes: 5
   env:
