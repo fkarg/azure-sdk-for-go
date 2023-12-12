@@ -104,7 +104,7 @@ function RetrieveReleaseTag($artifactLocation, $continueOnError = $true) {
 function RetrievePackages($artifactLocation, [switch]$NoRecurse) {
   $pkgs = @()
   if ($NoRecurse) {
-    $pkgs = Get-ChildItem -Path $artifactLocation -Include $packagePattern -Recurse -File
+    $pkgs = Get-ChildItem -Path $artifactLocation -Include $packagePattern -File
   } else {
     $pkgs = Get-ChildItem -Path $artifactLocation -Include $packagePattern -Recurse -File
   }
@@ -162,7 +162,7 @@ function VerifyPackages([string]$artifactLocation, $workingDirectory, $apiUrl, $
   $results = @([array]$pkgList | Sort-Object -Property Tag -uniq)
 
   $existingTags = GetExistingTags($apiUrl)
-  
+
   $intersect = $results | % { $_.Tag } | ? { $existingTags -contains $_ }
 
   if ($intersect.Length -gt 0 -and !$continueOnError) {
