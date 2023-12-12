@@ -24,6 +24,8 @@ param (
 $apiUrl = "https://api.github.com/repos/$repoId"
 Write-Host "Using API URL $apiUrl"
 
+Set-PSDebug -Trace 2
+
 # VERIFY PACKAGES
 $pkgList = VerifyPackages -artifactLocation $artifactLocation -workingDirectory $workingDirectory -apiUrl $apiUrl -releaseSha $releaseSha -continueOnError $continueOnError -NoRecurse:$NoRecurse
 
