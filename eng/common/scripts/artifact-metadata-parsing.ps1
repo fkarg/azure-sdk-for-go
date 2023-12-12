@@ -161,7 +161,7 @@ function VerifyPackages([string]$artifactLocation, $workingDirectory, $apiUrl, $
 
   $results = @([array]$pkgList | Sort-Object -Property Tag -uniq)
 
-  $existingTags = GetExistingTags($apiUrl)
+  $existingTags = GetExistingTags $apiUrl
 
   $intersect = $results | % { $_.Tag } | ? { $existingTags -contains $_ }
 
